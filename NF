@@ -1,0 +1,138 @@
+[Pedro Cavalcanti Moura](https://pedromour4.github.io)
+
+Questao 1
+
+a)
+SELECT
+A.id_atendimento,
+P.nome_paciente,
+E.descricao_especialidade,
+DA.data_atendimento,
+PR.descricao_prontuario
+FROM
+Pacientes P
+JOIN Atendimento A ON P.id_paciente = A.id_paciente
+JOIN Prontuário PR ON A.id_prontuario = PR.id_prontuario
+JOIN cd_especialidade E ON PR.cd_especialidade = E.cd_especialidade
+WHERE
+E.descricao_especialidade = 'Neurologia'
+AND DA.data_atendimento >= DATEADD(MONTH, -6, GETDATE())
+ORDER BY
+DA.data_atendimento DESC;
+
+b)
+SELECT
+P.nome_paciente,
+PR.descricao_prontuario,
+DA.data_atendimento
+FROM
+Pacientes P
+JOIN Atendimento A ON P.id_paciente = A.id_paciente
+JOIN Prontuário PR ON A.id_prontuario = PR.id_prontuario
+WHERE
+P.id_paciente = 123;
+
+Questao 2
+
+R: 1- Primeiramente devemos conversar com o usuário/cliente para coletar algumas informações iniciais, sendo elas detalhadas, devemos questionar qual recurso ele esta utilizando, quando começou essa lentidão, se é em algum horário específico, dentre outros questionamentos.
+2- Podemos instalar ferramentas para a ánalise de dados na máquina do cliente, para assim coletar informações sobre CPU, memória, disco, rede e também de aplicativos relevantes, fazemos isso para ver se nap haverá nenhum gargalo na máquina nem nada do tipo.
+3- Temos também ferramentas que podemos utilizar para ver quais partes do código estão consumindo mais recursos, assim causando a lentidão.
+4- Devemos também fazer a consulta no bnaco de dados para verificar se não temos consultas SQL que não estão sendo utilizadas ou que estão ali em segundo plano apenas consumindo recursos.
+5- Fazer um teste de conectividade, para testar e verificar se nosso download e upload continua normal ou se esta havendo alguam instabilidade.
+6- Revisar o código fonte para ver se não existem problemas, isso pode estar gerando lentidão.
+7- Realizar testes simulando situações do sistema utilizando recursos intensivos, esta ação pode ajudar a verificiar se nessa hora esta acontencendo a lentidão ou não do sistema.
+8- Após realizar esses testes e obter os resultados, nos reunimos com a equipe e apresentamos todos os dados e debatemos qual a melhor solução para este caso.
+9- Colocaremos em prática a solução que obtivemos juntamente com a equipe e por fim devemos monitorar por um período, para ver se não haverá nenhuma outra instalibidade.
+
+Questao 3
+
+R: 1- Primeiro devemos obter as informações do erro, de preferência a mensagem em específico do erro, a mensagem completa e também o que ele fez para aparecer este erro.
+2- Sempre verificar a conectividade do usuário.
+3- Simular o erro é muito importante, reproduzir o passo a passo do usuário, até o momento em que apareceu a mensagem de erro para ele, isso irá mostrar para você o comportamento do erro e com ele você já pode analisar.
+4- Verificar as últimas Logs do sistema, tanto de aplicativos como de registros para assim obter mais informações do erro que pode nos ajudar a solucionar ele.
+5- Analisar os dados de entrada do usuário, para ver se eles estão corretos, se estão nos padrões e requisitos específicos do sistema. Verificar também o código fonte, olhando os possíveis erros de lógica ou qualquer outro problema que possa estar causando este erro.
+6- Testar o mesmo erro em diferentes ambiente, como pro exemplo na base de teste, base de produção, base de desenvolvimento, para ver se nestes diferentes ambientes também ocorre este erro.
+7- Após reunir todas estas informações, deve se reunir com a equipe, apresentar todos os dados coletados e discutir qual a melhor solução a ser feita nesta situação.
+8- Assim que tiver a solução, coloque para testes e informe para todos testarem para ver se o erro foi solucionado.
+9- E por fim, comunicar ao usuário que o erro foi solucionado e pedir para ele testar e assim seguir o que ele estava fazendo.
+
+Questao 4
+
+R: 1- Pegar o erro detalhado com o usuário, ações que levaram ao erro, caso tenha uma mensagem de erro, pedir a mensagem que apareceu quando deu o erro, se ele observou algo de diferentes antes de dar o erro. Quanto mais informaçãoes obtiver, melhor.
+2- Reproduzir o passo a passo do usuário até chegar no erro, em diferentes bases, de teste, de desenvolvimento, produção, para ver se nelas também ocorre este erro.
+3- Como este erro é desconhecido, o melhor a se fazer é isolar ele, para fazer testes de entrada de dados e cenários em que ele pode aparecer, isso pode ajudar a encontrar detalhes específicos que causam o erro.
+4- Verificas os Logs.
+5- Consultar documentos, biblioteca ou serviços relacionados para ver se tem algo semelhante a o que esta acontecendo.
+6- Analisar o código fonte.
+7- Fazer busca em forúns, comunidades online ou até em bases de conhecimento por problemas parecidos relatados por outros usuários.
+8- Implementar a solução encontrada e começar a fazer os testes.
+9- Monitorar por um período para ver se o erro irá continuar a aparecendo.
+10- Comunicar com o usuário e pedir para ele fazer alguns testes para continuar o trabalho.
+
+Questoes de Lógica
+
+Questao 1
+
+R: function calcQeR(X, Y) {
+if (X < Y) {
+const quadradoMenor = X \* X;
+const raizMaior = Math.sqrt(Y);
+
+        console.log(`Quadrado do menor número (${X}): ${quadradoMenor}`);
+        console.log(`Raiz quadrada do maior número (${Y}): ${raizMaior}`);
+    } else if (Y < X) {
+        const quadradoMenor = Y * Y;
+        const raizMaior = Math.sqrt(X);
+
+        console.log(`Quadrado do menor número (${Y}): ${quadradoMenor}`);
+        console.log(`Raiz quadrada do maior número (${X}): ${raizMaior}`);
+    } else {
+        console.log("Os números são iguais.");
+    }
+
+}
+
+const readline = require('readline').createInterface({
+input: process.stdin,
+output: process.stdout
+});
+
+readline.question('Digite o primeiro número: ', (X) => {
+readline.question('Digite o segundo número: ', (Y) => {
+const X = parseFloat(X);
+const Y = parseFloat(Y);
+
+        if (isNaN(X) || isNaN(Y)) {
+            console.log("Favor, digitar números válidos.");
+        } else {
+            calcQeR(X, Y);
+        }
+
+        readline.close();
+    });
+
+});
+
+Questao 2
+
+R: const readline = require('readline').createInterface({
+input: process.stdin,
+output: process.stdout
+});
+
+readline.question('Digite o ano de nascimento: ', (ano de nascimento) => {
+const born = parseInt(ano);
+
+    if (isNaN(born)) {
+        console.log("Favor, digitar um ano válido.");
+    } else {
+        if ((born % 4 === 0 && born % 100 !== 0) || (born % 400 === 0)) {
+            console.log(`${born} é um ano bissexto.`);
+        } else {
+            console.log(`${born} não é um ano bissexto.`);
+        }
+    }
+
+    readline.close();
+
+});
